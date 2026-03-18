@@ -12,11 +12,11 @@ import modelo.Celda;
 
 public class ListaEnlazadaCeldas {
     private NodoCelda cabeza;
-    private int tamaño;
+    private int tamanio;
 
     public ListaEnlazadaCeldas() {
         this.cabeza = null;
-        this.tamaño = 0;
+        this.tamanio = 0;
     }
 
     /** Agrega una celda al final de la lista */
@@ -31,7 +31,7 @@ public class ListaEnlazadaCeldas {
             }
             actual.siguiente = nuevo;
         }
-        tamaño++;
+        tamanio++;
     }
 
     /** Busca celda por referencia */
@@ -51,14 +51,14 @@ public class ListaEnlazadaCeldas {
         if (cabeza == null) return false;
         if (refFn.apply(cabeza.celda).equals(referencia)) {
             cabeza = cabeza.siguiente;
-            tamaño--;
+            tamanio--;
             return true;
         }
         NodoCelda actual = cabeza;
         while (actual.siguiente != null) {
             if (refFn.apply(actual.siguiente.celda).equals(referencia)) {
                 actual.siguiente = actual.siguiente.siguiente;
-                tamaño--;
+                tamanio--;
                 return true;
             }
             actual = actual.siguiente;
@@ -71,8 +71,8 @@ public class ListaEnlazadaCeldas {
         return cabeza;
     }
 
-    public int getTamaño() {
-        return tamaño;
+    public int getTamanio() {
+        return tamanio;
     }
 
     public boolean estaVacia() {
@@ -82,6 +82,6 @@ public class ListaEnlazadaCeldas {
     /** Vacía completamente la lista */
     public void limpiar() {
         cabeza = null;
-        tamaño = 0;
+        tamanio = 0;
     }
 }
