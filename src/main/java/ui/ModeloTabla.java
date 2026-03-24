@@ -3,7 +3,7 @@ package ui;
 import javax.swing.table.DefaultTableModel;
 import modelo.HojaCalculo;
 
-public class ModeloTabla {
+public class ModeloTabla extends DefaultTableModel{
 
     private HojaCalculo hoja;
     private int filas;
