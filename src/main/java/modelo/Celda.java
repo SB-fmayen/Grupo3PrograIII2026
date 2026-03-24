@@ -63,6 +63,34 @@ public class Celda {
         this.abajo = abajo;
     }
     
-
+public static class Builder {
+    private int fila;
+    private int columna;
+    private Object valor;
     
+    public Builder fila(int fila) {
+        this.fila = fila;
+        return this;
+}
+
+    public Builder columna(int columna) {
+        this.columna = columna;
+        return this;
+}
+
+    public Builder valor(Object valor) {
+        this.valor = valor;
+        return this;
+    }
+    public Celda build (){
+        if (fila < 0 || columna < 0)
+            throw new IllegalArgumentException ("Fla y columna deben ser >= 0");
+        return new Celda(this);
+    }
+}
+
+    @Override
+    public String toString() {
+        return String.format("Celda[%d,%d]=%s", fila, columna, valor);
+    }
 }

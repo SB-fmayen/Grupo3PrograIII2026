@@ -3,11 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package operaciones;
+import listas.ListaDouble;
 
 /**
  *
  * @author caste
  */
 public interface OperacionMatematica {
-    double ejecutar (ListaDouble valores);
+    double ejecutar(ListaDouble valores);
 }
