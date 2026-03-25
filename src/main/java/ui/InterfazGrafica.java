@@ -16,11 +16,7 @@ import java.awt.event.*;
 
 
 /**
- *
  * @author ALFREDO
- */
-
-/**
  * Ventana principal de la aplicación de hoja de cálculo.
  * Maneja pestañas, barra de fórmulas, numeración de filas
  * y portapapeles interno para cortar/copiar/pegar.
