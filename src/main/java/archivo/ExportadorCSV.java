@@ -1,64 +1,64 @@
 package archivo;
 
+
 import listas.NodoCelda;
 import modelo.HojaCalculo;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Exporta la hoja de cálculo a un archivo CSV (datos separados por comas).
+ * No usa colecciones de Java, recorre la lista enlazada manualmente.
+ */
 public class ExportadorCSV {
 
-//Recibe una hoja, recibe el nombre del archivo creamos el CSV (guardamos una hoja de calculo)
+    /**
+     * Guarda todos los datos de la hoja en un archivo .csv.
+     * Si el archivo no existe, lo crea. Si ya existe, lo sobreescribe.
+     *
+     * @param hoja          La hoja con los datos a exportar.
+     * @param nombreArchivo El nombre del archivo, ej: "datos.csv"
+     * @throws IOException Si hay un problema al escribir el archivo.
+     */
     public static void exportar(HojaCalculo hoja, String nombreArchivo) throws IOException {
-//habre el archivo, si no existe lo crea y se cierra automatico
+
+        // Abre el archivo. Al terminar el try, se cierra solo.
         try (FileWriter writer = new FileWriter(nombreArchivo)) {
 
-            int maxFila = 0;//busca el tamaño de la hoja
+            // Recorremos todas las celdas para saber qué tan grande es la hoja
+            int maxFila = 0;
             int maxColumna = 0;
 
-            NodoCelda actual = hoja.obtenerTodasLasCeldas().getCabeza();//recorre todas las celdas
+            NodoCelda actual = hoja.obtenerTodasLasCeldas().getCabeza();
             while (actual != null) {
-
-//detecta la fila y columna mas grande esto define el tamaño de la tabla
-                if (actual.celda.getFila() > maxFila) {
+                if (actual.celda.getFila() > maxFila)
                     maxFila = actual.celda.getFila();
-                }
-                if (actual.celda.getColumna() > maxColumna) {
+                if (actual.celda.getColumna() > maxColumna)
                     maxColumna = actual.celda.getColumna();
-                }
                 actual = actual.siguiente;
             }
 
-            for (int i = 0; i <= maxFila; i++) { // recorre como matriz, recorre filas 
-
-
-                StringBuilder linea = new StringBuilder();//Va armando cada fila del CSV
+            // Escribimos fila por fila, columna por columna
+            for (int i = 0; i <= maxFila; i++) {
+                StringBuilder linea = new StringBuilder();
 
                 for (int j = 0; j <= maxColumna; j++) {
-
-//Obtener referencia tipo Excel ((0,0)=A1 o B1)
                     String ref = hoja.posicionAReferencia(i, j);
-
-// obtener el valor, Busca el valor de esa celda                    
                     Object valor = hoja.obtenerValor(ref);
-
-//combertir a texto, Si hay valor lo convierte o Si no → deja vacío                
                     String valorStr = (valor != null) ? valor.toString() : "";
-// esto hace que las comas separen las columnas o comillas
-                    if (valorStr.contains(",") || valorStr.contains("\"")) {
+
+                    // Si el valor tiene comas o comillas, lo envolvemos entre comillas
+                    // para que el CSV no se confunda al leerlo
+                    if (valorStr.contains(",") || valorStr.contains("\""))
                         valorStr = "\"" + valorStr.replace("\"", "\"\"") + "\"";
-                    }
 
                     linea.append(valorStr);
-
-                    if (j < maxColumna) { // separador, agrega coma entre columnas
-                        linea.append(",");
-                    }
+                    if (j < maxColumna) linea.append(","); // Coma entre columnas, no al final
                 }
-//Escribir en archivo guarda la fila en el archivo               
-                writer.write(linea.toString());
-                writer.write("\n");
 
+                writer.write(linea.toString());
+                writer.write("\n"); // Salto de línea al terminar cada fila
             }
         }
-
     }
+}

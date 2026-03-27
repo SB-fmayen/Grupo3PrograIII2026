@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package operaciones;
+
 import listas.ListaDouble;
 
 /**
- *
- * @author caste
+ * Contrato que deben cumplir todas las operaciones matemáticas (Suma, Resta, etc.).
+ * Cada operación recibe una lista de valores y devuelve un resultado.
  */
 public interface OperacionMatematica {
     double ejecutar(ListaDouble valores);

@@ -1,15 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package listas;
+
 import modelo.Celda;
 
 /**
- * @author ALFREDO
- * Lista enlazada simple propia para almacenar Celdas
+ * Lista enlazada simple propia para almacenar Celdas.
  */
-
 public class ListaEnlazadaCeldas {
     private NodoCelda cabeza;
     private int tamanio;
@@ -34,7 +29,7 @@ public class ListaEnlazadaCeldas {
         tamanio++;
     }
 
-    /** Busca celda por referencia */
+    /** Busca celda por referencia (ej. "A1") */
     public Celda buscarPorReferencia(String referencia, java.util.function.Function<Celda, String> refFn) {
         NodoCelda actual = cabeza;
         while (actual != null) {
