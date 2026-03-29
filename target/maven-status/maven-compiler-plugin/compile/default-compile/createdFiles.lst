@@ -23,6 +23,7 @@ listas\NodoCelda.class
 modelo\Rango.class
 operaciones\Multiplicacion.class
 ui\DialogoNuevaHoja.class
+ui\InterfazGrafica$2.class
 evaluador\EvaluadorFormulas.class
 ui\ModeloTabla.class
 archivo\ImportadorCSV.class

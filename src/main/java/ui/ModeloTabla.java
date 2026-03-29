@@ -15,7 +15,7 @@ public class ModeloTabla extends DefaultTableModel {
     private ParserFormulas parser;
     private int filas;
     private int columnas;
-
+ 
     public ModeloTabla(HojaCalculo hoja, int filas, int columnas) {
         this.hoja    = hoja;
         this.parser  = new ParserFormulas(hoja);
@@ -23,7 +23,7 @@ public class ModeloTabla extends DefaultTableModel {
         this.columnas = columnas;
         inicializarTabla();
     }
-
+ 
     private void inicializarTabla() {
         String[] columnNames = new String[columnas];
         for (int i = 0; i < columnas; i++)
@@ -36,62 +36,69 @@ public class ModeloTabla extends DefaultTableModel {
             addRow(row);
         }
     }
-
+ 
     /**
      * Cuando el usuario confirma una celda:
-     *  1. Guarda el valor RAW en la HojaCalculo (incluye la fórmula si la hay)
-     *  2. Muestra en la tabla el resultado evaluado
+     * 1. Guarda el valor RAW en la HojaCalculo
+     * 2. Muestra en la tabla el resultado evaluado
      */
     @Override
     public void setValueAt(Object aValue, int row, int column) {
         String raw = aValue != null ? aValue.toString().trim() : "";
-
-        // 1. Guardar RAW en el modelo de datos
+ 
+        // Guardar RAW en el modelo de datos
         hoja.modificarValor(hoja.posicionAReferencia(row, column), raw);
-
-        // 2. Calcular qué mostrar en la celda
+ 
+        // Calcular que mostrar en la celda
         String mostrar = evaluar(raw);
-
-        // 3. Actualizar la vista (sin volver a llamar a hoja)
+ 
+        // Actualizar la vista sin volver a llamar a hoja
         super.setValueAt(mostrar, row, column);
     }
-
-    /** Evalúa una fórmula o devuelve el valor tal cual */
+ 
+    /**
+     * Limpia SOLO la vista de una celda sin tocar la HojaCalculo.
+     * Se usa despues de eliminarCelda() para no re-insertar el nodo.
+     */
+    public void limpiarCeldaVista(int row, int column) {
+        super.setValueAt("", row, column);
+    }
+ 
     private String evaluar(String raw) {
         if (raw == null || raw.isEmpty()) return "";
         if (parser.esFormula(raw)) {
             try {
                 double resultado = parser.evaluarFormula(raw);
-                // Si el resultado es entero, muéstralo sin decimales
                 if (resultado == Math.floor(resultado) && !Double.isInfinite(resultado))
                     return String.valueOf((long) resultado);
                 return String.valueOf(resultado);
             } catch (Exception e) {
-                return "¡ERROR: " + e.getMessage() + "!";
+                return "ERROR: " + e.getMessage();
             }
         }
         return raw;
     }
-
+ 
     /**
      * Devuelve el valor RAW guardado en HojaCalculo
-     * (lo usa la barra de fórmulas para mostrar "=SUMA(A1:A3)")
+     * (lo usa la barra de formulas para mostrar la formula original)
      */
     public String getRawValue(int row, int column) {
         Object v = hoja.obtenerValor(hoja.posicionAReferencia(row, column));
         return v != null ? v.toString() : "";
     }
-
-    /** Recalcula toda la hoja (útil tras importar CSV) */
+ 
+    /** Recalcula toda la hoja (util tras importar CSV) */
     public void actualizarDatos() {
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
+        for (int i = 0; i < getRowCount(); i++) {
+            for (int j = 0; j < getColumnCount(); j++) {
                 String raw = getRawValue(i, j);
                 super.setValueAt(evaluar(raw), i, j);
             }
         }
         fireTableDataChanged();
     }
-
+ 
     public HojaCalculo getHoja() { return hoja; }
 }
+ 
