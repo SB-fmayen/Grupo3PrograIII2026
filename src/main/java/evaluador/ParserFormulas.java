@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Interpreta y calcula fórmulas escritas en las celdas, igual que Excel.
  * Soporta funciones como SUMA, RESTA, MULTIPLICACION y DIVISION,
  * y también expresiones directas como =A1+B2*3
  */
