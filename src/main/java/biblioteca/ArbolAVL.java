@@ -6,7 +6,7 @@ package biblioteca;
 
 /**
  *
- * @author caste
+
  */
 import java.util.function.Consumer;
 
