@@ -10,4 +10,13 @@
         <maven.compiler.release>25</maven.compiler.release>
         <exec.mainClass>com.mycompany.grupo3prograiii2026.Grupo3PrograIII2026</exec.mainClass>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>12.6.1.jre11</version>
+        </dependency>
+    </dependencies>
+
 </project>
