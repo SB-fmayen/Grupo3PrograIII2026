@@ -12,6 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+<<<<<<< HEAD
     <build>
         <plugins>
             <plugin>
@@ -32,3 +33,14 @@
         <sourceDirectory>src/main/java</sourceDirectory>
     </build>
 </project>
+=======
+    <dependencies>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>12.6.1.jre11</version>
+        </dependency>
+    </dependencies>
+
+</project>
+>>>>>>> Alfredo
