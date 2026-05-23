@@ -10,7 +10,7 @@ public class Main {
     }
 
     private static void mostrarMenuPrincipal() { //Aquí construyes toda la ventanas de la interfaz
-
+        // soy jose
         JFrame menu = new JFrame("Grupo 3 - Programacion III 2026"); //Crear la ventana
 
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Cerrar programa al cerrar ventana
