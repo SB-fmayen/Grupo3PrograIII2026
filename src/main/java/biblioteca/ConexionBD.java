@@ -13,7 +13,7 @@ public class ConexionBD {
     private static final String PUERTO     = "1433";
     private static final String BASE_DATOS = "biblioteca_db";
     private static final String USUARIO    = "sa";
-    private static final String PASSWORD   = "TuPassword123";
+    private static final String PASSWORD   = "Admin123";
     // ─────────────────────────────────────────────────────────────────────────
 
     private static final String URL =
